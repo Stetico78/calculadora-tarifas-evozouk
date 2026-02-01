@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora Tarifas EvoZouk</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#0f0f14;color:#fff;margin:0}
+    .wrap{max-width:720px;margin:20px auto;padding:20px;background:#1b1b26;border-radius:14px}
+    h1{margin:0 0 10px}
+    .card{background:#26263a;border-radius:12px;padding:14px;margin:12px 0}
+    label{display:block;margin:8px 0 4px}
+    select,input[type="checkbox"]{width:100%;padding:10px;border-radius:8px;border:0}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .mods label{display:flex;gap:8px;align-items:center}
+    .total{font-size:22px;font-weight:bold;margin-top:10px}
+    .btn{background:#8f5cff;color:#fff;border:0;padding:12px 16px;border-radius:10px;cursor:pointer}
+    .note{opacity:.85;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Calculadora de Tarifas EvoZouk</h1>
+    <p class="note">Selecciona opciones y obtén el precio final al instante.</p>
+
+    <div class="card">
+      <label>Tipo</label>
+      <select id="tipo">
+        <option value="clase">Clase suelta</option>
+        <option value="mensual">Mensual</option>
+      </select>
+
+      <div class="row">
+        <div>
+          <label>Personas</label>
+          <select id="personas">
+            <option value="1">1 persona</option>
+            <option value="2">2 personas</option>
+          </select>
+        </div>
+        <div>
+          <label>Modalidades</label>
+          <select id="modsCount">
+            <option value="1">1 modalidad</option>
+            <option value="2">2 modalidades</option>
+            <option value="3">3 modalidades</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mods">
+      <strong>Modalidades exactas</strong>
+      <label><input type="checkbox" checked>Salsa</label>
+      <label><input type="checkbox">BachaZouk</label>
+      <label><input type="checkbox">Zouk</label>
+    </div>
+
+    <div class="card">
+      <button class="btn" onclick="calc()">Calcular</button>
+      <div id="out" class="total">Total: —</div>
+    </div>
+
+    <p class="note">Contacto WhatsApp: +34 645 77 20 10</p>
+  </div>
+
+<script>
+function calc(){
+  const tipo=document.getElementById('tipo').value;
+  const p=+document.getElementById('personas').value;
+  const m=+document.getElementById('modsCount').value;
+
+  let total=0;
+
+  if(tipo==='clase'){
+    total=10*p;
+  }else{
+    if(p===1 && m===1) total=30;
+    if(p===1 && m===2) total=50;
+    if(p===1 && m===3) total=60;
+    if(p===2 && m===1) total=50;
+    if(p===2 && m===2) total=72;
+    if(p===2 && m===3) total=90;
+  }
+  document.getElementById('out').innerText='Total: '+total+' €';
+}
+</script>
+</body>
+</html>

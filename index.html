@@ -3,362 +3,494 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Calcula tu tarifa Baila Zouk con Stef y Nesa</title>
+  <title>Calcula tu tarifa Baila Zouk | Stef & Nesa</title>
   <style>
     :root{
-      --bg1:#0b0820;
-      --bg2:#1a0f2f;
-      --card:#15122aee;
-      --card2:#121026cc;
-      --stroke:#2a2752;
-      --txt:#e9e8ff;
-      --muted:#b9b7e6;
-      --zouk:#4fd3ff;     /* azul zouk */
-      --fucsia:#ff4fd8;
-      --green:#27d17f;
-      --btn:#2a2752;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --radius:18px;
+      --bg1:#070616;
+      --bg2:#0b0a22;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+      --txt: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+
+      /* Tipografía (más grande) */
+      --fs-base: 17px;
+      --fs-h1: 36px;
+      --fs-h2: 22px;
+      --fs-label: 16px;
+      --fs-small: 14px;
+
+      /* Colores marca */
+      --zouk-blue: #79d7ff;
+      --zouk-fuchsia: #ff4be1;
+      --wa: #28d96b;
+      --gift: #ffd06a;
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--txt);
-      background: radial-gradient(1000px 600px at 20% 10%, #2a1a5c 0%, transparent 60%),
-                  radial-gradient(900px 700px at 90% 20%, #0f3a55 0%, transparent 55%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      font-size: var(--fs-base);
+      color: var(--txt);
+      background:
+        radial-gradient(1000px 550px at 15% 10%, rgba(140,60,255,.20), transparent 60%),
+        radial-gradient(900px 650px at 85% 20%, rgba(60,190,255,.18), transparent 55%),
+        radial-gradient(700px 450px at 50% 95%, rgba(255,70,220,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg1));
       min-height:100vh;
-      padding:28px 14px 60px;
+      padding: 26px 18px 44px;
     }
-    .wrap{max-width:1100px;margin:0 auto}
-    .hero{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid var(--stroke);
-      border-radius:24px;
-      padding:22px 22px 18px;
-      box-shadow: var(--shadow);
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
     }
-    .heroTop{
-      display:flex; gap:18px; align-items:flex-start; justify-content:space-between;
-      flex-wrap:wrap;
+
+    .header{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--stroke);
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      box-shadow: 0 22px 60px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
     }
-    .heroTitle{
+
+    .brand h1{
+      margin:0 0 8px 0;
+      font-size: var(--fs-h1);
+      line-height: 1.08;
+      letter-spacing: .2px;
+    }
+    .brand h1 .zouk{
+      color: var(--zouk-blue);
+      text-shadow: 0 0 22px rgba(121,215,255,.16);
+    }
+    .brand h1 .fuchsia{
+      color: var(--zouk-fuchsia);
+      text-shadow: 0 0 22px rgba(255,75,225,.12);
+    }
+    .sub{
       margin:0;
-      font-size:34px;
-      letter-spacing:.2px;
-      line-height:1.15;
-    }
-    .sub{margin:8px 0 0;color:var(--muted);font-size:14.5px}
-    .chips{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:14px;
-      align-items:center;
-    }
-    .chip{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:9px 12px;
-      border:1px solid var(--stroke);
-      border-radius:999px;
-      background: rgba(0,0,0,.18);
-      color:var(--txt);
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .chip a{color:inherit;text-decoration:none}
-    .chip.wh{border-color: rgba(39,209,127,.35)}
-    .chip.wh strong{color:#a7ffd6}
-    .chip.form{border-color: rgba(255,207,95,.35)}
-    .chip.form strong{color:#ffe2a8}
-    .heroLogoBox{
-      display:flex; align-items:center; justify-content:center;
-      width:360px; max-width:100%;
-      min-height:120px;
-      border:1px dashed rgba(255,255,255,.18);
-      border-radius:18px;
-      background: rgba(0,0,0,.16);
-      overflow:hidden;
-    }
-    .hero-logo{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      opacity:.98;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:16px;
-      margin-top:16px;
-    }
-    @media (max-width: 980px){
-      .grid{grid-template-columns:1fr}
-      .heroLogoBox{width:100%}
-    }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.06));
-      border:1px solid var(--stroke);
-      border-radius: var(--radius);
-      padding:16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-    }
-    h2{
-      margin:0 0 10px;
-      font-size:16px;
-      color:#ffffff;
-    }
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px}
-    select{
-      width:100%;
-      padding:11px 12px;
-      border-radius:12px;
-      border:1px solid var(--stroke);
-      background: rgba(0,0,0,.22);
-      color:var(--txt);
-      outline:none;
-    }
-    .row3{
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap:10px;
-    }
-    @media (max-width: 700px){
-      .row3{grid-template-columns:1fr}
-    }
-
-    .mods{
-      margin-top:10px;
-      display:grid;
-      gap:10px;
-    }
-    .mod{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:12px 12px;
-      border:1px solid var(--stroke);
-      border-radius:14px;
-      background: rgba(0,0,0,.16);
-    }
-    .mod strong{font-weight:700}
-    .mod input{transform:scale(1.12)}
-    .hint{color:var(--muted);font-size:12.5px;margin-top:6px}
-
-    .actions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:12px;
-      align-items:center;
-    }
-    .btn{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      color:var(--txt);
-      padding:11px 14px;
-      border-radius:14px;
-      cursor:pointer;
-      font-weight:700;
-    }
-    .btn:hover{filter:brightness(1.08)}
-    .btnCalc{
-      background: linear-gradient(135deg, rgba(79,211,255,.22), rgba(255,79,216,.14));
-      border-color: rgba(79,211,255,.32);
-      box-shadow: 0 10px 24px rgba(79,211,255,.10);
-      font-size:15px;
-      padding:12px 16px;
-    }
-    .btnPriv{
-      background: linear-gradient(135deg, rgba(255,79,216,.18), rgba(79,211,255,.10));
-      border-color: rgba(255,79,216,.30);
-      box-shadow: 0 10px 24px rgba(255,79,216,.10);
-      font-size:15px;
-      padding:12px 16px;
-    }
-    .btnWA{
-      background: linear-gradient(135deg, rgba(39,209,127,.22), rgba(39,209,127,.10));
-      border-color: rgba(39,209,127,.35);
-      font-size:14px;
-      padding:12px 14px;
-    }
-    .btnLink{
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.14);
-    }
-
-    .totalBox{
-      margin-top:10px;
-      padding:14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-    }
-    .total{
-      font-size:34px;
-      font-weight:900;
-      letter-spacing:.2px;
-      margin:0;
-      color:#ffffff;
-    }
-    .detail{
-      margin-top:6px;
-      font-size:13px;
-      color:var(--muted);
+      color: var(--muted);
+      font-size: 16px;
       line-height:1.35;
     }
 
-    .side h3{
-      margin:0 0 10px;
-      font-size:15px;
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 14px;
     }
-    .side p, .side li{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.45;
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,.22);
+      color: rgba(255,255,255,.90);
+      font-weight: 650;
+      font-size: 15px;
+      white-space: nowrap;
     }
-    .side ul{margin:8px 0 0; padding-left:18px}
-    .smallLink{color:#cde9ff;text-decoration:none}
-    .smallLink:hover{text-decoration:underline}
+    .chip b{ font-weight: 800; }
+    .chip.wa{
+      border-color: rgba(40,217,107,.35);
+      background: linear-gradient(135deg, rgba(40,217,107,.14), rgba(40,217,107,.06));
+    }
+    .chip.wa b{ color: rgba(40,217,107,.95); }
+    .chip.place{
+      border-color: rgba(255,255,255,.12);
+    }
+    .chip.time{
+      border-color: rgba(121,215,255,.22);
+    }
+
+    .logoBox{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      min-height: 168px;
+      padding: 12px;
+    }
+    .logoBox img{
+      max-width: 100%;
+      max-height: 140px;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 30px rgba(0,0,0,.35));
+    }
+
+    .infoBar{
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      font-size: 16px;
+      line-height: 1.35;
+      color: rgba(255,255,255,.86);
+    }
+
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .card{
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: 0 18px 55px rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+      padding: 18px;
+    }
+
+    .card h2{
+      margin: 0 0 12px 0;
+      font-size: var(--fs-h2);
+      letter-spacing: .2px;
+    }
+
+    .row3{
+      display:grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .header{ grid-template-columns: 1fr; }
+      .row3{ grid-template-columns: 1fr; }
+    }
+
+    label{
+      display:block;
+      margin: 0 0 8px 0;
+      font-size: var(--fs-label);
+      color: rgba(255,255,255,.86);
+      font-weight: 700;
+    }
+
+    select{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.92);
+      outline: none;
+      font-size: 16px;
+    }
+
+    .modsWrap{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+    }
+
+    .modsTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .modsTitle .hint{
+      font-size: var(--fs-small);
+      color: rgba(255,255,255,.70);
+    }
+
+    /* Modalidades: nombre a la izquierda, checkbox a la derecha */
+    .modLine{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      margin-bottom: 10px;
+    }
+    .modLine:last-child{ margin-bottom:0; }
+    .modName{
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .modName .tag{
+      font-size: 12px;
+      color: rgba(255,255,255,.65);
+      font-weight: 700;
+      margin-left: 8px;
+    }
+    input[type="checkbox"]{
+      transform: scale(1.25);
+      accent-color: var(--zouk-blue);
+      cursor: pointer;
+    }
+    .disabled{
+      opacity: .55;
+      pointer-events: none;
+    }
+
+    .actionsRow{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 13px 16px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight: 850;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      user-select:none;
+      backdrop-filter: blur(10px);
+    }
+
+    .btnPrimary{
+      padding: 14px 18px;
+      font-size: 19px;
+      border: 1px solid rgba(121,215,255,.45);
+      background: linear-gradient(135deg, rgba(121,215,255,.30), rgba(255,75,225,.20));
+      box-shadow: 0 12px 32px rgba(90,90,255,.22);
+    }
+    .btnGhost{
+      font-size: 18px;
+    }
+    .btnGift{
+      font-size: 18px;
+      border: 1px solid rgba(255,208,106,.55);
+      background: linear-gradient(135deg, rgba(255,208,106,.22), rgba(255,80,180,.14));
+      box-shadow: 0 12px 32px rgba(255,180,80,.16);
+      color: rgba(255,255,255,.95);
+    }
+    .btnWa{
+      min-width: 230px;
+      font-size: 18px;
+      border: 1px solid rgba(40,217,107,.55);
+      background: linear-gradient(135deg, rgba(40,217,107,.22), rgba(40,217,107,.10));
+      box-shadow: 0 12px 32px rgba(40,217,107,.10);
+    }
+
+    .resultBox{
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+    }
+    .totalBig{
+      font-size: 42px;
+      font-weight: 950;
+      letter-spacing: .3px;
+      margin: 0;
+    }
+    .details{
+      margin-top: 8px;
+      color: rgba(255,255,255,.78);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .note{
+      margin-top: 10px;
+      color: rgba(255,255,255,.72);
+      font-size: var(--fs-small);
+    }
+
+    /* Privadas en bloque ancho */
+    .privGrid{
+      display:grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .privGrid{ grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
+    <section class="header">
+      <div class="brand">
+        <h1>
+          Calcula tu tarifa <span class="fuchsia">Baila</span> <span class="zouk">Zouk</span> con Stef y Nesa
+        </h1>
 
-  <section class="hero">
-    <div class="heroTop">
-      <div style="flex:1; min-width:260px">
-        <h1 class="heroTitle">Calcula tu tarifa Baila Zouk con Stef y Nesa</h1>
-        <div class="sub">Puertollano · Calcula al instante según lo que quieres: clase suelta, mensual, pareja/amigos o privadas.</div>
+        <p class="sub">
+          Puertollano · Calcula al instante según lo que quieres: clase suelta, mensual, pareja/amigos o privadas.
+        </p>
 
         <div class="chips">
-          <span class="chip">📍 Edificio Tauro · 1ª plantaa la derecha </span>
-          <span class="chip">🕒 18:30 Salsa · 19:30 BachaZouk · 20:30 Zouk</span>
+          <div class="chip place">📍 <b>Edificio Tauro</b> · 1ª planta (izq.)</div>
+          <div class="chip time">🕒 18:30 Salsa · 19:30 BachaZouk · 20:30 Zouk</div>
+          <div class="chip wa">🟢 WhatsApp <b>Stef</b>: +34 645 77 20 10</div>
+          <div class="chip wa">🟢 WhatsApp <b>Nesa</b>: 615 486 473</div>
+        </div>
 
-          <!-- WhatsApp en la MISMA línea -->
-          <span class="chip wh"><a href="https://wa.me/34645772010" target="_blank" rel="noopener"><strong>WhatsApp Stef:</strong> +34 645 77 20 10</a></span>
-          <span class="chip wh"><a href="https://wa.me/34615486473" target="_blank" rel="noopener"><strong>WhatsApp Nesa:</strong> 615 486 473</a></span>
-
-          <span class="chip form"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xHXLkY5xwgaYm93pTlrl8Nu3ACw/viewform" target="_blank" rel="noopener"><strong>🎁 Consigue tu clase GRATIS</strong> (Formulario)</a></span>
+        <div class="infoBar">
+          <b>Cómo funciona:</b> elige tipo, personas y modalidades → pulsa <b>Calcular</b>.
+          Luego confirma por WhatsApp (Stef o Nesa) con el mensaje ya preparado.
         </div>
       </div>
 
-      <!-- LOGO / FOTO -->
-      <div class="heroLogoBox" title="Logo / foto">
-        <!-- IMPORTANTE: sube el archivo al repo en assets/logo-bailazouk.jpg -->
-        <img src="logobailazouk.png" alt="Baila Zouk - Stef & Nesa" style="max-width:220px;margin:20px auto;display:block;">
+      <div class="logoBox">
+        <!-- IMPORTANTE: el archivo debe estar en la raíz del repo con este nombre -->
+        <img id="logo"
+             src="./logobailazouk.png"
+             alt="Logo Baila Zouk"
+             onerror="this.onerror=null;this.src='./logotipo-bailazouk.png';" />
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="grid">
+    <div class="grid">
 
-    <!-- IZQ: Calculadora principal -->
-    <div class="card">
-      <h2>1) Tarifas de clases (según tabla)</h2>
+      <!-- 1) TARIFAS (ANCHO) -->
+      <section class="card">
+        <h2>1) Tarifas de clases (según tabla)</h2>
 
-      <div class="row3">
-        <div>
-          <label for="tipo">Tipo</label>
-          <select id="tipo">
-            <option value="mensual" selected>Mensual</option>
-            <option value="clase">Clase suelta</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="personas">Personas</label>
-          <select id="personas">
-            <option value="1" selected>1 persona</option>
-            <option value="2">2 personas</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="modsCount">Modalidades</label>
-          <select id="modsCount">
-            <option value="1" selected>1 modalidad</option>
-            <option value="2">2 modalidades</option>
-            <option value="3">3 modalidades</option>
-          </select>
-        </div>
-      </div>
-
-      <div style="margin-top:14px">
-        <h2>2) Modalidades exactas</h2>
-        <div class="hint">Elige exactamente las modalidades que quieres (se limita automáticamente según 1 / 2 / 3).</div>
-
-        <div class="mods" id="mods">
-          <div class="mod">
-            <strong>Salsa</strong>
-            <input type="checkbox" id="m_salsa">
-          </div>
-          <div class="mod">
-            <strong>BachaZouk</strong>
-            <input type="checkbox" id="m_bachazouk">
-          </div>
-          <div class="mod">
-            <strong>Zouk</strong>
-            <input type="checkbox" id="m_zouk">
-          </div>
-        </div>
-
-        <div class="hint" id="modsHint">Elige exactamente 1 modalidad(es).</div>
-      </div>
-
-      <div style="margin-top:14px">
-        <h2>3) Descuento (no acumulable)</h2>
-        <label for="descuento">Selecciona descuento</label>
-        <select id="descuento">
-          <option value="none" selected>Ninguno</option>
-          <option value="amigo5">Invitas a un amigo (−5€)</option>
-        </select>
-        <div class="hint">Se aplica solo en “Mensual” y solo si NO estás en “2 personas”.</div>
-      </div>
-
-      <div class="actions">
-        <button class="btn btnCalc" id="btnCalc">Calcular</button>
-        <a class="btn btnLink" href="https://bailazouk.my.canva.site/" target="_blank" rel="noopener">Volver a la Landing</a>
-        <button class="btn btnWA" id="btnWASt">Confirmar tarifa por WhatsApp (Stef)</button>
-        <button class="btn btnWA" id="btnWANe">Confirmar tarifa por WhatsApp (Nesa)</button>
-      </div>
-
-      <div class="totalBox">
-        <p class="total" id="total">Total: —</p>
-        <div class="detail" id="detail">Tarifa: — · Precio por persona: —</div>
-        <div class="detail" id="modsDetail">Modalidades: —</div>
-      </div>
-    </div>
-
-    <!-- DER: Info + privadas -->
-    <div class="card side">
-      <h3>Info rápida</h3>
-      <p>Objetivo: que el alumno elija su tarifa y te escriba para confirmar.</p>
-      <ul>
-        <li>En los botones WhatsApp se abre el chat con el mensaje ya escrito.</li>
-        <li>La clase GRATIS se consigue con el formulario.</li>
-      </ul>
-
-      <div style="margin-top:16px">
-        <h2>4) Clases privadas + packs</h2>
-        <p>Esta parte ya queda lista para usar cuando activéis privadas e intensivos.</p>
-
-        <div class="row3" style="grid-template-columns:1.2fr .9fr .9fr">
+        <div class="row3">
           <div>
-            <label for="privAlumno">¿Eres alumno actual?</label>
-            <select id="privAlumno">
-              <option value="si" selected>Sí (alumno)</option>
-              <option value="no">No (externo)</option>
+            <label for="tipo">Tipo</label>
+            <select id="tipo">
+              <option value="mensual" selected>Mensual</option>
+              <option value="clase">Clase suelta</option>
             </select>
           </div>
+
+          <div>
+            <label for="personas">Personas</label>
+            <select id="personas">
+              <option value="1" selected>1 persona</option>
+              <option value="2">2 personas</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="modsCount">Modalidades</label>
+            <select id="modsCount">
+              <option value="1" selected>1 modalidad</option>
+              <option value="2">2 modalidades</option>
+              <option value="3">3 modalidades</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modsWrap">
+          <div class="modsTitle">
+            <div style="font-weight:900;font-size:18px;">2) Modalidades exactas</div>
+            <div class="hint" id="modsHint">Elige exactamente 1 modalidad.</div>
+          </div>
+
+          <div class="modLine">
+            <div class="modName">Salsa <span class="tag">(18:30)</span></div>
+            <input type="checkbox" id="mSalsa" />
+          </div>
+
+          <div class="modLine">
+            <div class="modName">BachaZouk <span class="tag">(19:30)</span></div>
+            <input type="checkbox" id="mBachaZouk" />
+          </div>
+
+          <div class="modLine">
+            <div class="modName">Zouk <span class="tag">(20:30)</span></div>
+            <input type="checkbox" id="mZouk" />
+          </div>
+
+          <div class="note" id="modsError" style="display:none; color: rgba(255,120,120,.95); font-weight:800;">
+            Selecciona exactamente el número de modalidades indicado.
+          </div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <label for="descuento">3) Descuento (no acumulable)</label>
+          <select id="descuento">
+            <option value="none" selected>Ninguno</option>
+            <option value="invita5">Invito a un amigo/a que se apunta (−5€)</option>
+          </select>
+          <div class="note" id="descNote">
+            * El descuento −5€ se aplica solo a “Mensual” con 1 persona. No acumulable con “2 personas”.
+          </div>
+        </div>
+
+        <!-- Botones: (arriba) Calcular + Landing + Formulario -->
+        <div class="actionsRow">
+          <button class="btn btnPrimary" onclick="calcTarifa()">Calcular</button>
+
+          <a class="btn btnGhost" href="https://bailazouk.my.canva.site/" target="_blank" rel="noopener">
+            Volver a la Landing
+          </a>
+
+          <a class="btn btnGift"
+             href="https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xwgaYm93pTlrl8Nu3ACw/viewform"
+             target="_blank" rel="noopener">
+            🎁 Consigue tu clase GRATIS (Formulario)
+          </a>
+        </div>
+
+        <!-- Botones WhatsApp juntos (abajo, misma línea) -->
+        <div class="actionsRow">
+          <a class="btn btnWa" id="waStef" target="_blank" rel="noopener">Confirmar tarifa por WhatsApp (Stef)</a>
+          <a class="btn btnWa" id="waNesa" target="_blank" rel="noopener">Confirmar tarifa por WhatsApp (Nesa)</a>
+        </div>
+
+        <div class="resultBox">
+          <p class="totalBig">Total: <span id="total">—</span></p>
+          <div class="details" id="detailTarifa">Tarifa: —</div>
+          <div class="details" id="detailMods">Modalidades: —</div>
+          <div class="details" id="detailDesc">Descuento: —</div>
+        </div>
+      </section>
+
+      <!-- 4) PRIVADAS (ABAJO, ANCHO) -->
+      <section class="card">
+        <h2>4) Clases privadas + packs</h2>
+        <div class="note" style="margin-top:-6px;">
+          Tarifa privadas:
+          <b>Alumno</b> (1 pers: 25€ / pareja: 20€ por persona = 40€) ·
+          <b>Externo</b> (1 pers: 30€ / pareja: 30€ por persona = 60€) ·
+          Packs: <b>5 clases pagas 4</b> · <b>10 clases pagas 8</b>.
+        </div>
+
+        <div class="privGrid" style="margin-top:12px;">
+          <div>
+            <label for="privTipo">¿Eres alumno actual?</label>
+            <select id="privTipo">
+              <option value="alumno" selected>Sí (alumno)</option>
+              <option value="externo">No (externo)</option>
+            </select>
+          </div>
+
           <div>
             <label for="privPers">Personas</label>
             <select id="privPers">
               <option value="1" selected>1 persona</option>
-              <option value="2">Pareja (2)</option>
+              <option value="2">Pareja (2 personas)</option>
             </select>
           </div>
+
           <div>
             <label for="privPack">Pack</label>
             <select id="privPack">
@@ -369,217 +501,285 @@
           </div>
         </div>
 
-        <div class="actions" style="margin-top:10px">
-          <button class="btn btnPriv" id="btnPriv">Calcular privadas</button>
+        <div class="actionsRow" style="margin-top:14px;">
+          <button class="btn btnPrimary" onclick="calcPrivadas()">Calcular privadas</button>
         </div>
 
-        <div class="totalBox" style="margin-top:10px">
-          <p class="total" style="font-size:26px" id="privTotal">Privadas: —</p>
-          <div class="detail" id="privDetail">Detalle: —</div>
-          <div class="detail" style="margin-top:10px">
-            <strong>Tarifas privadas:</strong>
-            <ul>
-              <li>Alumno: 1 persona = 25€ · Pareja = 20€/persona (40€)</li>
-              <li>Externo: 1 persona = 30€ · Pareja = 30€/persona (60€)</li>
-              <li>Pack 5: pagas 4 · Pack 10: pagas 8</li>
-            </ul>
-          </div>
-          <div class="detail" style="margin-top:8px">
-            <a class="smallLink" target="_blank" rel="noopener"
-               href="https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xHXLkY5xwgaYm93pTlrl8Nu3ACw/viewform">
-              🎁 Abrir formulario “clase GRATIS”
-            </a>
-          </div>
+        <div class="resultBox">
+          <p class="totalBig">Privadas: <span id="privTotal">—</span></p>
+          <div class="details" id="privDetail">Detalle: —</div>
         </div>
-      </div>
+      </section>
+
     </div>
+  </div>
 
-  </section>
-</div>
+  <script>
+    // ===== Config =====
+    const LANDING_URL = "https://bailazouk.my.canva.site/";
+    const CALC_URL = "https://stetico78.github.io/calculadora-tarifas-evozouk/";
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xwgaYm93pTlrl8Nu3ACw/viewform";
 
-<script>
-  const el = (id)=>document.getElementById(id);
+    const WHATS_STEF = "34645772010";
+    const WHATS_NESA = "34615486473";
 
-  const tipo = el('tipo');
-  const personas = el('personas');
-  const modsCount = el('modsCount');
-  const descuento = el('descuento');
+    // ===== Helpers =====
+    const $ = (id) => document.getElementById(id);
 
-  const mSalsa = el('m_salsa');
-  const mBacha = el('m_bachazouk');
-  const mZouk  = el('m_zouk');
+    function getSelectedMods(){
+      const mods = [];
+      if ($("mSalsa").checked) mods.push("Salsa");
+      if ($("mBachaZouk").checked) mods.push("BachaZouk");
+      if ($("mZouk").checked) mods.push("Zouk");
+      return mods;
+    }
 
-  const totalEl = el('total');
-  const detailEl = el('detail');
-  const modsHint = el('modsHint');
-  const modsDetail = el('modsDetail');
+    function setModsHint(){
+      const n = parseInt($("modsCount").value, 10);
+      $("modsHint").textContent = n === 3
+        ? "En 3 modalidades se seleccionan las 3 obligatoriamente."
+        : `Elige exactamente ${n} modalidad${n>1?"es":""}.`;
+    }
 
-  function selectedMods(){
-    const arr=[];
-    if(mSalsa.checked) arr.push('Salsa');
-    if(mBacha.checked) arr.push('BachaZouk');
-    if(mZouk.checked)  arr.push('Zouk');
-    return arr;
-  }
+    function enforceModsLimit(){
+      const n = parseInt($("modsCount").value, 10);
+      const boxes = [$("mSalsa"), $("mBachaZouk"), $("mZouk")];
 
-  function enforceModsLimit(){
-    const limit = Number(modsCount.value);
-    const chosen = selectedMods().length;
+      // Caso 3: obligatorias todas
+      if (n === 3){
+        boxes.forEach(b => { b.checked = true; b.disabled = true; b.closest(".modLine").classList.remove("disabled"); });
+        $("modsError").style.display = "none";
+        setModsHint();
+        return;
+      }
 
-    modsHint.textContent = `Elige exactamente ${limit} modalidad(es).`;
+      // Si no es 3, habilitar y gestionar límites
+      boxes.forEach(b => { b.disabled = false; b.closest(".modLine").classList.remove("disabled"); });
 
-    // si ya eligió el máximo, bloquea las no marcadas
-    const lock = (chosen >= limit);
-    [mSalsa, mBacha, mZouk].forEach(cb=>{
-      if(!cb.checked) cb.disabled = lock;
-      else cb.disabled = false;
+      const selected = boxes.filter(b => b.checked).length;
+
+      // Si se pasa del límite, desmarca extra (simple: deja las primeras)
+      if (selected > n){
+        let count = 0;
+        boxes.forEach(b => {
+          if (b.checked){
+            count++;
+            if (count > n) b.checked = false;
+          }
+        });
+      }
+
+      // Si ya se llegó al límite, deshabilita las no seleccionadas
+      const selectedNow = boxes.filter(b => b.checked).length;
+      if (selectedNow >= n){
+        boxes.forEach(b => {
+          if (!b.checked){
+            b.disabled = true;
+            b.closest(".modLine").classList.add("disabled");
+          }
+        });
+      }
+
+      $("modsError").style.display = "none";
+      setModsHint();
+    }
+
+    function autoRulesByTipo(){
+      const tipo = $("tipo").value;
+
+      // Clase suelta: siempre 1 modalidad (pero eliges cuál)
+      if (tipo === "clase"){
+        $("modsCount").value = "1";
+        $("modsCount").disabled = true;
+      } else {
+        $("modsCount").disabled = false;
+      }
+      enforceModsLimit();
+    }
+
+    // ===== Cálculo tarifas tabla =====
+    function calcFromTable(tipo, personas, modsCount){
+      // Devuelve {total, tarifaCode, perPerson}
+      personas = parseInt(personas, 10);
+      modsCount = parseInt(modsCount, 10);
+
+      // Clase suelta (TARIFA 8): 10€ por persona
+      if (tipo === "clase"){
+        const total = 10 * personas;
+        return { total, tarifaCode: "TARIFA 8", perPerson: 10 };
+      }
+
+      // Mensual: según tu tabla
+      if (personas === 1 && modsCount === 1) return { total: 30, tarifaCode: "TARIFA 1", perPerson: 30 };
+      if (personas === 1 && modsCount === 2) return { total: 50, tarifaCode: "TARIFA 2", perPerson: 25 };
+      if (personas === 1 && modsCount === 3) return { total: 60, tarifaCode: "TARIFA 3", perPerson: 20 };
+
+      if (personas === 2 && modsCount === 1) return { total: 50, tarifaCode: "TARIFA 4", perPerson: 25 };
+      if (personas === 2 && modsCount === 2) return { total: 72, tarifaCode: "TARIFA 5", perPerson: 18 };
+      if (personas === 2 && modsCount === 3) return { total: 90, tarifaCode: "TARIFA 6", perPerson: 15 };
+
+      // Fallback seguro
+      return { total: 0, tarifaCode: "—", perPerson: 0 };
+    }
+
+    function applyDiscount(total, tipo, personas){
+      const d = $("descuento").value;
+      if (d === "invita5"){
+        // regla: solo mensual + 1 persona
+        if (tipo === "mensual" && parseInt(personas,10) === 1){
+          return { total: Math.max(0, total - 5), label: "Invito a un amigo/a que se apunta (−5€)" };
+        }
+        return { total, label: "Invito a un amigo/a (NO aplica en este caso)" };
+      }
+      return { total, label: "Ninguno" };
+    }
+
+    function validateModsCount(){
+      const n = parseInt($("modsCount").value,10);
+      const mods = getSelectedMods();
+      // en 3 modalidades, ya forzamos todas
+      if (n === 3) return true;
+      return mods.length === n;
+    }
+
+    // ===== WhatsApp links =====
+    function buildWaText(summary){
+      // Mensaje corto y útil (con links)
+      const lines = [
+        "Hola 👋 Soy alumno/a y quiero confirmar mi tarifa:",
+        "",
+        `• Tipo: ${summary.tipoText}`,
+        `• Personas: ${summary.personas}`,
+        `• Modalidades: ${summary.mods.join(", ")}`,
+        `• Tarifa: ${summary.tarifaCode}`,
+        `• Total: ${summary.total} €`,
+        summary.descText ? `• Descuento: ${summary.descText}` : "",
+        "",
+        `✅ Calculadora: ${CALC_URL}`,
+        `🎁 Clase gratis (formulario): ${FORM_URL}`,
+        `🌐 Landing: ${LANDING_URL}`,
+        "",
+        "¿Me lo confirmáis y me decís cómo reservar? Gracias 🙌"
+      ].filter(Boolean);
+
+      return lines.join("\n");
+    }
+
+    function setWaLinks(summary){
+      const txt = encodeURIComponent(buildWaText(summary));
+      $("waStef").href = `https://wa.me/${WHATS_STEF}?text=${txt}`;
+      $("waNesa").href = `https://wa.me/${WHATS_NESA}?text=${txt}`;
+    }
+
+    // ===== Acciones =====
+    function calcTarifa(){
+      autoRulesByTipo();
+
+      if (!validateModsCount()){
+        $("modsError").style.display = "block";
+        $("total").textContent = "—";
+        $("detailTarifa").textContent = "Tarifa: —";
+        $("detailMods").textContent = "Modalidades: —";
+        $("detailDesc").textContent = "Descuento: —";
+        return;
+      }
+
+      const tipo = $("tipo").value;
+      const personas = $("personas").value;
+      const modsCount = $("modsCount").value;
+      const mods = getSelectedMods();
+
+      const base = calcFromTable(tipo, personas, modsCount);
+      const disc = applyDiscount(base.total, tipo, personas);
+
+      $("total").textContent = disc.total;
+      $("detailTarifa").textContent = `Tarifa: ${base.tarifaCode} · Precio por persona: ${base.perPerson} € / persona`;
+      $("detailMods").textContent = `Modalidades: ${mods.join(", ")}`;
+      $("detailDesc").textContent = `Descuento: ${disc.label}`;
+
+      const summary = {
+        tipoText: (tipo === "clase") ? "Clase suelta" : "Mensual",
+        personas: (parseInt(personas,10) === 1) ? "1" : "2",
+        mods,
+        tarifaCode: base.tarifaCode,
+        total: disc.total,
+        descText: disc.label
+      };
+      setWaLinks(summary);
+    }
+
+    function calcPrivadas(){
+      const tipo = $("privTipo").value; // alumno / externo
+      const pers = parseInt($("privPers").value,10); // 1 / 2
+      const pack = parseInt($("privPack").value,10); // 1 / 5 / 10
+
+      // Base por clase (por persona si pareja)
+      let basePerPerson = 0;
+      if (tipo === "alumno"){
+        basePerPerson = (pers === 1) ? 25 : 20;
+      } else {
+        basePerPerson = (pers === 1) ? 30 : 30;
+      }
+
+      // Total por 1 clase (si pareja, multiplica por 2)
+      let oneClassTotal = basePerPerson * pers;
+
+      // Packs: 5 pagas 4, 10 pagas 8
+      let factor = pack;
+      let packLabel = `${pack} clase(s)`;
+      if (pack === 5){ factor = 4; packLabel = "Pack 5 (pagas 4)"; }
+      if (pack === 10){ factor = 8; packLabel = "Pack 10 (pagas 8)"; }
+
+      const total = oneClassTotal * factor;
+
+      $("privTotal").textContent = total + " €";
+      $("privDetail").textContent =
+        `${(tipo==="alumno"?"Alumno":"Externo")} · ${pers===1?"1 persona":"Pareja"} · ${packLabel} · ` +
+        `Base: ${oneClassTotal} € por clase`;
+
+      // Actualiza también WhatsApp con resumen de privadas (por si quieren confirmar privadas)
+      const summary = {
+        tipoText: "Clase privada",
+        personas: (pers===1) ? "1" : "2",
+        mods: ["Privadas"],
+        tarifaCode: (tipo==="alumno")
+          ? (pers===1 ? "Privada Alumno 1p" : "Privada Alumno Pareja")
+          : (pers===1 ? "Privada Externo 1p" : "Privada Externo Pareja"),
+        total: total,
+        descText: packLabel
+      };
+      setWaLinks(summary);
+    }
+
+    // ===== Eventos UI =====
+    ["tipo","personas","modsCount"].forEach(id => $(id).addEventListener("change", () => {
+      autoRulesByTipo();
+    }));
+
+    ["mSalsa","mBachaZouk","mZouk"].forEach(id => $(id).addEventListener("change", () => {
+      enforceModsLimit();
+    }));
+
+    $("descuento").addEventListener("change", () => {
+      // recalcula si ya hay total
+      if ($("total").textContent !== "—") calcTarifa();
     });
 
-    // si baja el limit, desmarca extras automáticamente (de abajo arriba)
-    if(chosen > limit){
-      const order = [mZouk, mBacha, mSalsa]; // orden para quitar
-      for(const cb of order){
-        if(selectedMods().length <= limit) break;
-        if(cb.checked) cb.checked = false;
-      }
-    }
-  }
-
-  function adjustForTipo(){
-    // Si es clase suelta: personas=1, modalidades=1 y bloqueo
-    if(tipo.value === 'clase'){
-      personas.value = '1';
-      modsCount.value = '1';
-      personas.disabled = true;
-      modsCount.disabled = true;
-    }else{
-      personas.disabled = false;
-      modsCount.disabled = false;
-    }
-    enforceModsLimit();
-  }
-
-  function calcMain(){
-    const t = tipo.value;
-    const p = Number(personas.value);
-    const m = Number(modsCount.value);
-
-    // Validación modalidades exactas
-    const mods = selectedMods();
-    if(mods.length !== m){
-      totalEl.textContent = `Total: —`;
-      detailEl.textContent = `Selecciona exactamente ${m} modalidad(es).`;
-      modsDetail.textContent = `Modalidades: ${mods.join(', ') || '—'}`;
-      return;
-    }
-
-    let total = 0;
-    let tarifa = '';
-    let precioPersona = 0;
-
-    if(t === 'clase'){
-      // Clase suelta (TARIFA 8): 10€ por persona, solo 1 persona, 1 modalidad
-      tarifa = 'TARIFA 8 (Clase suelta)';
-      precioPersona = 10;
-      total = 10;
-    }else{
-      // Mensual según tu tabla:
-      // 1 persona:
-      // m1 => 30 (T1) ; m2 => 50 (T2 total) ; m3 => 60 (T3 total)
-      // 2 personas:
-      // m1 => 50 (T4 total) ; m2 => 72 (T5 total) ; m3 => 90 (T6 total)
-      if(p===1 && m===1){ total=30; tarifa='TARIFA 1'; precioPersona=30; }
-      if(p===1 && m===2){ total=50; tarifa='TARIFA 2'; precioPersona=25; }
-      if(p===1 && m===3){ total=60; tarifa='TARIFA 3'; precioPersona=20; }
-      if(p===2 && m===1){ total=50; tarifa='TARIFA 4'; precioPersona=25; }
-      if(p===2 && m===2){ total=72; tarifa='TARIFA 5'; precioPersona=18; }
-      if(p===2 && m===3){ total=90; tarifa='TARIFA 6'; precioPersona=15; }
-
-      // Descuento NO acumulable: solo mensual y solo si NO es 2 personas
-      if(descuento.value === 'amigo5' && p !== 2){
-        total = Math.max(0, total - 5);
-      }
-    }
-
-    totalEl.textContent = `Total: ${total} €`;
-    detailEl.textContent = `Tarifa: ${tarifa} · Precio por persona: ${precioPersona}€ / persona`;
-    modsDetail.textContent = `Modalidades: ${mods.join(', ')}`;
-  }
-
-  function waMessage(who){
-    const t = tipo.value === 'clase' ? 'Clase suelta' : 'Mensual';
-    const p = personas.value;
-    const m = modsCount.value;
-    const mods = selectedMods().join(', ') || '—';
-    const totalTxt = totalEl.textContent.replace('Total: ','').trim();
-
-    const text =
-`Hola ${who}, quiero confirmar mi tarifa 😊
-• Tipo: ${t}
-• Personas: ${p}
-• Modalidades: ${m} (${mods})
-• ${totalEl.textContent}
-
-Link calculadora: ${location.href}
-Landing: https://bailazouk.my.canva.site/
-Formulario clase GRATIS: https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xHXLkY5xwgaYm93pTlrl8Nu3ACw/viewform`;
-
-    return encodeURIComponent(text);
-  }
-
-  el('btnCalc').addEventListener('click', calcMain);
-
-  el('btnWASt').addEventListener('click', ()=>{
-    calcMain();
-    window.open(`https://wa.me/34645772010?text=${waMessage('Stef')}`, '_blank');
-  });
-
-  el('btnWANe').addEventListener('click', ()=>{
-    calcMain();
-    window.open(`https://wa.me/34615486473?text=${waMessage('Nesa')}`, '_blank');
-  });
-
-  // Privadas
-  const privAlumno = el('privAlumno');
-  const privPers = el('privPers');
-  const privPack = el('privPack');
-  const privTotal = el('privTotal');
-  const privDetail = el('privDetail');
-
-  function calcPriv(){
-    const isAlumno = privAlumno.value === 'si';
-    const p = Number(privPers.value);
-    const pack = Number(privPack.value);
-
-    let base = 0;
-    let detalle = '';
-
-    if(isAlumno){
-      if(p===1){ base = 25; detalle = 'Alumno · 1 persona'; }
-      else { base = 40; detalle = 'Alumno · Pareja (40€)'; }
-    }else{
-      if(p===1){ base = 30; detalle = 'Externo · 1 persona'; }
-      else { base = 60; detalle = 'Externo · Pareja (60€)'; }
-    }
-
-    let total = base;
-    if(pack===5){ total = base * 4; detalle += ' · Pack 5 (pagas 4)'; }
-    if(pack===10){ total = base * 8; detalle += ' · Pack 10 (pagas 8)'; }
-
-    privTotal.textContent = `Privadas: ${total} €`;
-    privDetail.textContent = `Detalle: ${detalle}`;
-  }
-
-  el('btnPriv').addEventListener('click', calcPriv);
-
-  // Reglas automáticas en cambios
-  [modsCount, mSalsa, mBacha, mZouk].forEach(x=>x.addEventListener('change', enforceModsLimit));
-  tipo.addEventListener('change', adjustForTipo);
-
-  // Init
-  adjustForTipo();
-  enforceModsLimit();
-  calcMain();
-</script>
+    // ===== Init =====
+    (function init(){
+      // estado inicial: 1 modalidad obligatoria (pero que el usuario elija cuál)
+      $("mBachaZouk").checked = true; // por defecto (puedes cambiar)
+      autoRulesByTipo();
+      // Prepara WhatsApp con un mensaje base aunque no hayan calculado todavía
+      setWaLinks({
+        tipoText: "Mensual",
+        personas: "1",
+        mods: ["BachaZouk"],
+        tarifaCode: "—",
+        total: "—",
+        descText: "—"
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1,45 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculadora Tarifas EvoZouk</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora Tarifas Baila Zouk - Stef & Nesa</title>
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;background:#0f0f14;color:#fff;margin:0}
-    .wrap{max-width:720px;margin:20px auto;padding:20px;background:#1b1b26;border-radius:14px}
-    h1{margin:0 0 10px}
-    .card{background:#26263a;border-radius:12px;padding:14px;margin:12px 0}
-    label{display:block;margin:8px 0 4px}
-    select,input[type="checkbox"]{width:100%;padding:10px;border-radius:8px;border:0}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .mods label{display:flex;gap:8px;align-items:center}
-    .total{font-size:22px;font-weight:bold;margin-top:10px}
-    .btn{background:#8f5cff;color:#fff;border:0;padding:12px 16px;border-radius:10px;cursor:pointer}
-    .note{opacity:.85;font-size:13px}
+    :root{
+      --bg1:#070716;
+      --bg2:#0b1026;
+      --card:#121833cc;
+      --card2:#0f1430cc;
+      --text:#f4f6ff;
+      --muted:#b9c2ff;
+      --line:#2a3370;
+      --accent:#7c4dff;
+      --accent2:#00d4ff;
+      --ok:#19d38a;
+      --warn:#ffcc00;
+      --danger:#ff4d6d;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(124,77,255,.25), transparent 55%),
+        radial-gradient(1000px 700px at 80% 30%, rgba(0,212,255,.18), transparent 55%),
+        radial-gradient(900px 600px at 50% 90%, rgba(255,77,109,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      padding:28px 14px;
+    }
+    .wrap{max-width:920px;margin:0 auto;}
+    .hero{
+      padding:26px 22px;
+      background: linear-gradient(180deg, rgba(18,24,51,.75), rgba(18,24,51,.35));
+      border:1px solid rgba(42,51,112,.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 200px at 20% 0%, rgba(124,77,255,.35), transparent 60%),
+                  radial-gradient(400px 200px at 80% 20%, rgba(0,212,255,.28), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .hero > *{position:relative}
+    h1{
+      margin:0 0 8px 0;
+      font-size: clamp(22px, 3.2vw, 34px);
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:0 0 18px 0;
+      color: var(--muted);
+      line-height:1.35;
+    }
+    .badge-row{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin: 10px 0 0 0;
+    }
+    .badge{
+      border:1px solid rgba(42,51,112,.7);
+      background: rgba(15,20,48,.55);
+      padding:8px 10px;
+      border-radius:999px;
+      color: var(--muted);
+      font-size:13px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      margin-top:16px;
+    }
+    .card{
+      background: rgba(18,24,51,.62);
+      border:1px solid rgba(42,51,112,.75);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding:18px;
+    }
+    .card h2{
+      margin:0 0 10px 0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media(min-width:720px){
+      .row{ grid-template-columns: 1.2fr 1fr 1fr; }
+      .row.two{ grid-template-columns: 1fr 1fr; }
+      .row.three{ grid-template-columns: 1fr 1fr 1fr; }
+    }
+    label{
+      display:block;
+      font-size:13px;
+      color: var(--muted);
+      margin-bottom:6px;
+    }
+    select, input[type="number"]{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(42,51,112,.85);
+      background: rgba(10,12,28,.7);
+      color: var(--text);
+      outline:none;
+    }
+    select:disabled, input:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+    .mods{
+      display:grid;
+      gap:10px;
+      margin-top:6px;
+    }
+    .mod-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(42,51,112,.65);
+      background: rgba(15,20,48,.45);
+    }
+    .mod-left{
+      display:flex; align-items:center; gap:10px;
+      color: var(--text);
+      font-weight:600;
+    }
+    .hint{color:var(--muted); font-size:13px; margin-top:10px; line-height:1.35;}
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .btn{
+      border:1px solid rgba(42,51,112,.9);
+      background: linear-gradient(135deg, rgba(124,77,255,.95), rgba(0,212,255,.55));
+      color:#06101e;
+      font-weight:800;
+      padding:11px 14px;
+      border-radius:14px;
+      cursor:pointer;
+      box-shadow: 0 10px 30px rgba(124,77,255,.25);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .btn.secondary{
+      background: rgba(15,20,48,.55);
+      color: var(--text);
+      box-shadow:none;
+    }
+    .btn.ghost{
+      background: transparent;
+      color: var(--text);
+      box-shadow:none;
+    }
+    .total{
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight:900;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(42,51,112,.75);
+      background: rgba(15,20,48,.55);
+      color: var(--muted);
+      font-size:13px;
+      margin-top:10px;
+    }
+    .ok{color:var(--ok)}
+    .warn{color:var(--warn)}
+    .danger{color:var(--danger)}
+    .footer{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      color: var(--muted);
+      font-size:13px;
+    }
+    .small{
+      font-size:12px;
+      color: var(--muted);
+      opacity:.95;
+    }
+    .hr{
+      height:1px; background: rgba(42,51,112,.65);
+      margin: 14px 0;
+    }
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <h1>Calculadora de Tarifas EvoZouk</h1>
-    <p class="note">Selecciona opciones y obtén el precio final al instante.</p>
 
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>Calculadora de tarifas Baila Zouk en Puertollano (Stef & Nesa)</h1>
+    <p class="subtitle">Calcula aquí tu tarifa al instante según lo que quieres: clase suelta, mensual, pareja o clases privadas.</p>
+    <div class="badge-row">
+      <div class="badge">📍 Edificio Tauro · Puertollano</div>
+      <div class="badge">🕡 18:30 Salsa · 19:30 BachaZouk · 20:30 Zouk</div>
+      <div class="badge">📲 WhatsApp: 34645772010</div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- TARIFAS MENSUALES / CLASE SUELTA -->
     <div class="card">
-      <label>Tipo</label>
-      <select id="tipo">
-        <option value="clase">Clase suelta</option>
-        <option value="mensual">Mensual</option>
-      </select>
+      <h2>1) Tarifas de clases (según tabla)</h2>
 
       <div class="row">
         <div>
-          <label>Personas</label>
-          <select id="personas">
-            <option value="1">1 persona</option>
-            <option value="2">2 personas</option>
+          <label for="tipo">Tipo</label>
+          <select id="tipo">
+            <option value="mensual">Mensual</option>
+            <option value="clase">Clase suelta</option>
           </select>
         </div>
+
         <div>
-          <label>Modalidades</label>
+          <label for="personas">Personas</label>
+          <select id="personas">
+            <option value="1">1 persona</option>
+            <option value="2">2 personas (pareja/amigos)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="modsCount">Modalidades</label>
           <select id="modsCount">
             <option value="1">1 modalidad</option>
             <option value="2">2 modalidades</option>
@@ -47,43 +260,342 @@
           </select>
         </div>
       </div>
+
+      <div class="hr"></div>
+
+      <h2>2) Modalidades exactas</h2>
+      <div class="small">Elige exactamente las modalidades que quieres (se limita automáticamente según 1 / 2 / 3).</div>
+
+      <div class="mods" id="modsBox">
+        <div class="mod-item">
+          <div class="mod-left">
+            <input id="mSalsa" type="checkbox" />
+            <span>Salsa</span>
+          </div>
+        </div>
+        <div class="mod-item">
+          <div class="mod-left">
+            <input id="mBacha" type="checkbox" />
+            <span>BachaZouk</span>
+          </div>
+        </div>
+        <div class="mod-item">
+          <div class="mod-left">
+            <input id="mZouk" type="checkbox" />
+            <span>Zouk</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hint" id="modsHint">Tip: si eliges “1 modalidad”, solo podrás marcar 1 checkbox.</div>
+
+      <div class="hr"></div>
+
+      <h2>3) Descuento (no acumulable)</h2>
+      <div class="row two">
+        <div>
+          <label for="descuento">Selecciona descuento</label>
+          <select id="descuento">
+            <option value="0">Ninguno</option>
+            <option value="5">Invito a un amigo que se apunta este mes (−5€ para ti)</option>
+          </select>
+        </div>
+        <div class="small" id="descuentoInfo" style="align-self:end">
+          *Se aplica solo en “Mensual” y solo si no estás en “2 personas”.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="btnCalc">Calcular</button>
+        <a class="btn secondary" href="https://bailazouk.my.canva.site/" target="_blank" rel="noopener">Volver a la Landing</a>
+        <button class="btn ghost" id="btnShare">Compartir / Copiar enlace</button>
+        <a class="btn secondary" href="https://wa.me/34645772010" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+
+      <div class="total" id="outTotal">Total: —</div>
+      <div class="pill" id="outDetalle">Tarifa: — · Precio por persona: —</div>
+      <div class="hint" id="outMods">Modalidades: —</div>
     </div>
 
-    <div class="card mods">
-      <strong>Modalidades exactas</strong>
-      <label><input type="checkbox" checked>Salsa</label>
-      <label><input type="checkbox">BachaZouk</label>
-      <label><input type="checkbox">Zouk</label>
-    </div>
-
+    <!-- CLASES PRIVADAS -->
     <div class="card">
-      <button class="btn" onclick="calc()">Calcular</button>
-      <div id="out" class="total">Total: —</div>
+      <h2>4) Clases privadas + packs</h2>
+      <div class="small">Activa esta parte cuando empecéis con privadas e intensivos. Ya queda lista.</div>
+
+      <div class="row three" style="margin-top:10px">
+        <div>
+          <label for="privAlumno">¿Eres alumno actual?</label>
+          <select id="privAlumno">
+            <option value="si">Sí (alumno)</option>
+            <option value="no">No (externo)</option>
+          </select>
+        </div>
+        <div>
+          <label for="privPersonas">Personas</label>
+          <select id="privPersonas">
+            <option value="1">1 persona</option>
+            <option value="2">2 personas (pareja)</option>
+          </select>
+        </div>
+        <div>
+          <label for="privPack">Pack</label>
+          <select id="privPack">
+            <option value="1">1 clase</option>
+            <option value="5">Pack 5 (pagas 4)</option>
+            <option value="10">Pack 10 (pagas 8)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn secondary" id="btnPriv">Calcular privadas</button>
+      </div>
+
+      <div class="total" id="outPriv">Privadas: —</div>
+      <div class="hint" id="outPrivDetalle">Detalle: —</div>
+
+      <div class="hint">
+        Tarifas usadas:
+        <ul class="small">
+          <li>Alumno: 1 persona = 25€ · Pareja = 20€/persona (40€)</li>
+          <li>Externo: 1 persona = 30€ · Pareja = 30€/persona (60€)</li>
+          <li>Pack 5: pagas 4 · Pack 10: pagas 8</li>
+        </ul>
+      </div>
     </div>
 
-    <p class="note">Contacto WhatsApp: +34 645 77 20 10</p>
   </div>
 
+  <div class="footer">
+    <div>© Stef & Nesa · EvoZouk / BailaZouk</div>
+    <div class="small">Si algo no cuadra, es porque falta una tarifa nueva: se añade en 30 segundos.</div>
+  </div>
+</div>
+
 <script>
-function calc(){
-  const tipo=document.getElementById('tipo').value;
-  const p=+document.getElementById('personas').value;
-  const m=+document.getElementById('modsCount').value;
+  const tipo = document.getElementById('tipo');
+  const personas = document.getElementById('personas');
+  const modsCount = document.getElementById('modsCount');
+  const descuento = document.getElementById('descuento');
 
-  let total=0;
+  const mSalsa = document.getElementById('mSalsa');
+  const mBacha = document.getElementById('mBacha');
+  const mZouk  = document.getElementById('mZouk');
+  const modChecks = [mSalsa, mBacha, mZouk];
 
-  if(tipo==='clase'){
-    total=10*p;
-  }else{
-    if(p===1 && m===1) total=30;
-    if(p===1 && m===2) total=50;
-    if(p===1 && m===3) total=60;
-    if(p===2 && m===1) total=50;
-    if(p===2 && m===2) total=72;
-    if(p===2 && m===3) total=90;
+  const outTotal = document.getElementById('outTotal');
+  const outDetalle = document.getElementById('outDetalle');
+  const outMods = document.getElementById('outMods');
+  const modsHint = document.getElementById('modsHint');
+
+  function selectedMods(){
+    const list = [];
+    if(mSalsa.checked) list.push("Salsa");
+    if(mBacha.checked) list.push("BachaZouk");
+    if(mZouk.checked)  list.push("Zouk");
+    return list;
   }
-  document.getElementById('out').innerText='Total: '+total+' €';
-}
+
+  function enforceTipoRules(){
+    if(tipo.value === 'clase'){
+      // Clase suelta = 1 persona + 1 modalidad
+      personas.value = "1";
+      modsCount.value = "1";
+      personas.disabled = true;
+      modsCount.disabled = true;
+      descuento.value = "0";
+      descuento.disabled = true;
+
+      // En clase suelta: solo 1 modalidad marcada
+      enforceModLimit();
+    } else {
+      personas.disabled = false;
+      modsCount.disabled = false;
+      descuento.disabled = false;
+      enforceDiscountRules();
+      enforceModLimit();
+    }
+  }
+
+  function enforceDiscountRules(){
+    // Descuento solo si mensual y 1 persona (no pareja)
+    if(tipo.value !== 'mensual') {
+      descuento.value = "0";
+      descuento.disabled = true;
+      return;
+    }
+    if(personas.value === "2"){
+      descuento.value = "0";
+      descuento.disabled = true;
+      return;
+    }
+    descuento.disabled = false;
+  }
+
+  function enforceModLimit(){
+    const limit = parseInt(modsCount.value, 10);
+
+    // Mensual: si limit=3 -> obliga a las 3
+    if(tipo.value === 'mensual' && limit === 3){
+      modChecks.forEach(c => { c.checked = true; c.disabled = true; });
+      modsHint.textContent = "Has elegido 3 modalidades: quedan marcadas obligatoriamente.";
+      return;
+    }
+
+    // Si tipo=clase -> limit fijo 1
+    // Si mensual limit 1 o 2: permitir marcar hasta ese límite
+    modChecks.forEach(c => c.disabled = false);
+
+    // Si hay más marcadas que el límite, desmarca extras automáticamente
+    let picked = selectedMods();
+    if(picked.length > limit){
+      // desmarca de abajo hacia arriba hasta cumplir
+      for(let i = modChecks.length - 1; i >= 0; i--){
+        if(modChecks[i].checked && selectedMods().length > limit){
+          modChecks[i].checked = false;
+        }
+      }
+    }
+
+    // Deshabilita las no marcadas cuando ya alcanzas el límite
+    if(selectedMods().length >= limit){
+      modChecks.forEach(c => {
+        if(!c.checked) c.disabled = true;
+      });
+    }
+
+    modsHint.textContent = `Elige exactamente ${limit} modalidad(es).`;
+  }
+
+  modChecks.forEach(c => c.addEventListener('change', enforceModLimit));
+
+  tipo.addEventListener('change', () => {
+    enforceTipoRules();
+    calc();
+  });
+
+  personas.addEventListener('change', () => {
+    enforceDiscountRules();
+    calc();
+  });
+
+  modsCount.addEventListener('change', () => {
+    enforceModLimit();
+    calc();
+  });
+
+  descuento.addEventListener('change', calc);
+
+  function calc(){
+    const t = tipo.value;              // mensual | clase
+    const p = parseInt(personas.value, 10);   // 1 | 2
+    const m = parseInt(modsCount.value, 10);  // 1 | 2 | 3
+    const d = parseInt(descuento.value, 10);  // 0 | 5
+
+    // Tarifas mensuales según tu tabla
+    // 1 persona: m=1 -> 30; m=2 -> 50; m=3 -> 60
+    // 2 personas: m=1 -> 50; m=2 -> 72; m=3 -> 90
+    // Clase suelta: 10€ (siempre 1 persona, 1 modalidad)
+    let total = 0;
+    let tarifaTxt = "—";
+    let precioPersona = "—";
+
+    if(t === "clase"){
+      total = 10;
+      tarifaTxt = "TARIFA 8 (Clase suelta)";
+      precioPersona = "10€ / persona";
+    } else {
+      if(p === 1 && m === 1){ total = 30; tarifaTxt="TARIFA 1"; precioPersona="30€ / persona"; }
+      if(p === 1 && m === 2){ total = 50; tarifaTxt="TARIFA 2"; precioPersona="25€ / persona"; }
+      if(p === 1 && m === 3){ total = 60; tarifaTxt="TARIFA 3"; precioPersona="20€ / persona"; }
+
+      if(p === 2 && m === 1){ total = 50; tarifaTxt="TARIFA 4 (Pareja)"; precioPersona="25€ / persona"; }
+      if(p === 2 && m === 2){ total = 72; tarifaTxt="TARIFA 5 (Pareja)"; precioPersona="18€ / persona"; }
+      if(p === 2 && m === 3){ total = 90; tarifaTxt="TARIFA 6 (Pareja)"; precioPersona="15€ / persona"; }
+
+      // Descuento NO acumulable: solo mensual y solo 1 persona
+      if(p === 1 && d > 0){
+        total = Math.max(0, total - d);
+        tarifaTxt += ` + descuento (−${d}€)`;
+      }
+    }
+
+    const mods = selectedMods();
+    outTotal.textContent = `Total: ${total} €`;
+    outDetalle.textContent = `Tarifa: ${tarifaTxt} · Precio por persona: ${precioPersona}`;
+    outMods.textContent = `Modalidades: ${mods.length ? mods.join(" + ") : "—"}`;
+  }
+
+  // Compartir / copiar enlace
+  document.getElementById('btnShare').addEventListener('click', async () => {
+    const url = window.location.href;
+    try{
+      if(navigator.share){
+        await navigator.share({ title: document.title, url });
+      } else {
+        await navigator.clipboard.writeText(url);
+        alert("Enlace copiado ✅");
+      }
+    } catch(e){
+      try{
+        await navigator.clipboard.writeText(url);
+        alert("Enlace copiado ✅");
+      }catch(_){
+        alert("No se pudo copiar. Copia manualmente el enlace del navegador.");
+      }
+    }
+  });
+
+  document.getElementById('btnCalc').addEventListener('click', calc);
+
+  // PRIVADAS
+  const privAlumno = document.getElementById('privAlumno');
+  const privPersonas = document.getElementById('privPersonas');
+  const privPack = document.getElementById('privPack');
+  const outPriv = document.getElementById('outPriv');
+  const outPrivDetalle = document.getElementById('outPrivDetalle');
+
+  function calcPriv(){
+    const alum = privAlumno.value;               // si | no
+    const p = parseInt(privPersonas.value,10);   // 1 | 2
+    const pack = parseInt(privPack.value,10);    // 1 | 5 | 10
+
+    // Base según lo que dijiste:
+    // Alumno: 1p=25; 2p=20€/p (40)
+    // Externo: 1p=30; 2p=30€/p (60)
+    let base = 0;
+    let baseTxt = "";
+
+    if(alum === "si"){
+      if(p === 1){ base = 25; baseTxt = "Alumno · 1 persona (25€)"; }
+      else { base = 40; baseTxt = "Alumno · pareja (20€/p = 40€)"; }
+    } else {
+      if(p === 1){ base = 30; baseTxt = "Externo · 1 persona (30€)"; }
+      else { base = 60; baseTxt = "Externo · pareja (30€/p = 60€)"; }
+    }
+
+    // Packs:
+    // 1 -> pagas 1
+    // 5 -> pagas 4
+    // 10 -> pagas 8
+    let payableUnits = 1;
+    if(pack === 5) payableUnits = 4;
+    if(pack === 10) payableUnits = 8;
+
+    const total = base * payableUnits;
+    outPriv.textContent = `Privadas: ${total} €`;
+    outPrivDetalle.textContent = `Detalle: ${baseTxt} · Pack ${pack} → pagas ${payableUnits} (total = ${base} x ${payableUnits})`;
+  }
+
+  document.getElementById('btnPriv').addEventListener('click', calcPriv);
+
+  // Init: marca 1 modalidad por defecto para que no salga vacío
+  mBacha.checked = true;
+  enforceTipoRules();
+  enforceModLimit();
+  enforceDiscountRules();
+  calc();
 </script>
+
 </body>
 </html>

@@ -4,37 +4,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Calcula tu tarifa Baila Zouk con Stef y Nesa</title>
+
   <style>
     :root{
       --bg1:#0b0b16;
       --bg2:#14102a;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.08);
-      --stroke:rgba(255,255,255,.10);
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.70);
-      --muted2:rgba(255,255,255,.55);
+      --stroke:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.94);
+      --muted:rgba(255,255,255,.74);
+      --muted2:rgba(255,255,255,.58);
+
       --pink:#ff4fd8;
       --blue:#43d9ff;
       --green:#24e57a;
       --amber:#ffcc66;
+
       --shadow:0 18px 60px rgba(0,0,0,.45);
       --r:20px;
       --r2:14px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(255,79,216,.20), transparent 55%),
-        radial-gradient(900px 600px at 65% 15%, rgba(67,217,255,.18), transparent 55%),
+        radial-gradient(1200px 700px at 15% 10%, rgba(255,79,216,.22), transparent 55%),
+        radial-gradient(900px 600px at 65% 15%, rgba(67,217,255,.20), transparent 55%),
         radial-gradient(900px 600px at 30% 90%, rgba(67,217,255,.10), transparent 60%),
         linear-gradient(135deg, var(--bg2), var(--bg1));
       min-height:100vh;
       padding:28px 16px 44px;
     }
+
     .wrap{max-width:1060px;margin:0 auto;}
     .card{
       background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
@@ -49,36 +52,41 @@
       display:grid;
       grid-template-columns: 1.35fr .65fr;
       gap:18px;
-      padding:22px 22px 18px;
+      padding:24px 22px 18px;
     }
     @media (max-width: 900px){
       .hero{grid-template-columns:1fr}
     }
+
     h1{
       margin:0 0 10px;
-      font-size:34px;
-      line-height:1.1;
+      font-size:38px; /* +size */
+      line-height:1.08;
       letter-spacing:.2px;
     }
+
     .brand{
-      font-weight:900;
+      font-weight:1000;
       background: linear-gradient(90deg, var(--pink), var(--blue));
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
     }
+
     .sub{
       margin:0 0 14px;
       color:var(--muted);
-      font-size:16px;
-      line-height:1.4;
+      font-size:17px; /* +size */
+      line-height:1.45;
     }
+
     .chips{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       margin:10px 0 12px;
     }
+
     .chip{
       display:inline-flex;
       align-items:center;
@@ -86,41 +94,45 @@
       padding:10px 12px;
       border-radius:999px;
       background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
       color:var(--text);
-      font-weight:650;
-      font-size:14px;
+      font-weight:800;
+      font-size:15px; /* +size */
       white-space:nowrap;
     }
-    .chip strong{font-weight:900}
+    .chip strong{font-weight:1000}
     .chip.green{
-      background:rgba(36,229,122,.10);
-      border-color:rgba(36,229,122,.22);
+      background:rgba(36,229,122,.12);
+      border-color:rgba(36,229,122,.26);
     }
     .chip a{color:inherit;text-decoration:none}
+
     .how{
       margin-top:10px;
       padding:14px 14px;
       border-radius:14px;
       background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
       color:var(--muted);
-      font-size:15px;
+      font-size:16px; /* +size */
       line-height:1.35;
     }
+
+    /* LOGO */
     .logoBox{
       border-radius:var(--r);
       border:1px dashed rgba(255,255,255,.18);
       background:rgba(0,0,0,.18);
-      min-height:170px;
+      min-height:220px;              /* MÁS GRANDE */
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:14px;
+      padding:12px;
     }
     .logoBox img{
       width:100%;
-      max-width:360px;
+      max-width:520px;               /* MÁS GRANDE */
+      max-height:200px;              /* evita que se salga del box */
       height:auto;
       display:block;
       object-fit:contain;
@@ -128,14 +140,15 @@
     }
 
     /* MAIN */
-    .main{
-      padding:18px 22px 22px;
-    }
+    .main{ padding:18px 22px 24px; }
+
     .sectionTitle{
-      font-size:20px;
+      font-size:22px; /* +size */
       margin:0 0 12px;
       letter-spacing:.2px;
+      font-weight:950;
     }
+
     .grid{
       display:grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -144,22 +157,25 @@
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
     }
+
     .field{
       background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.09);
+      border:1px solid rgba(255,255,255,.10);
       border-radius:14px;
       padding:12px;
     }
+
     .label{
-      font-size:14px;
+      font-size:15px; /* +size */
       color:var(--muted);
       margin:0 0 8px;
-      font-weight:700;
+      font-weight:850;
     }
-    select, input[type="text"]{
+
+    select{
       width:100%;
       border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.14);
       background:rgba(0,0,0,.25);
       color:var(--text);
       padding:12px 12px;
@@ -167,12 +183,9 @@
       outline:none;
     }
 
-    /* Modalidades list */
-    .modsWrap{
-      margin-top:14px;
-      display:grid;
-      gap:10px;
-    }
+    /* MODALIDADES */
+    .modsWrap{ margin-top:14px; display:grid; gap:10px; }
+
     .modRow{
       display:flex;
       align-items:center;
@@ -181,41 +194,27 @@
       padding:14px 14px;
       border-radius:14px;
       background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.09);
+      border:1px solid rgba(255,255,255,.10);
     }
-    .modLeft{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-    .modName{
-      font-size:18px;
-      font-weight:850;
-      letter-spacing:.2px;
-    }
-    .modTime{
-      font-size:13px;
-      color:var(--muted2);
-      font-weight:700;
-    }
-    .modRow input{
-      width:20px;height:20px;
-      accent-color: var(--blue);
-    }
+    .modLeft{ display:flex; flex-direction:column; gap:4px; }
+    .modName{ font-size:18px; font-weight:950; letter-spacing:.2px; }
+    .modTime{ font-size:13px; color:var(--muted2); font-weight:800; }
+    .modRow input{ width:20px;height:20px; accent-color: var(--blue); }
+
     .hint{
       margin-top:8px;
       color:var(--muted2);
       font-size:14px;
-      font-weight:650;
+      font-weight:750;
     }
 
-    /* Discount */
+    /* DESCUENTO */
     .discountBar{
       margin-top:14px;
       padding:12px 12px;
       border-radius:14px;
       background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.09);
+      border:1px solid rgba(255,255,255,.10);
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -226,24 +225,25 @@
       display:flex;
       align-items:center;
       gap:10px;
-      font-weight:800;
+      font-weight:900;
       color:var(--text);
       user-select:none;
+      font-size:15px; /* +size */
     }
     .toggle input{width:20px;height:20px;accent-color:var(--green)}
     .smallNote{
       color:var(--muted2);
       font-size:13px;
-      font-weight:650;
+      font-weight:750;
     }
 
-    /* Private fields */
+    /* PRIVADAS (inline, según Tipo) */
     .privateBox{
       margin-top:14px;
       padding:14px;
       border-radius:16px;
       background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.09);
+      border:1px solid rgba(255,255,255,.10);
       display:none;
     }
     .privateGrid{
@@ -256,7 +256,7 @@
     }
     .privateBox .title{
       font-size:16px;
-      font-weight:900;
+      font-weight:1000;
       margin:0 0 12px;
       color:var(--text);
     }
@@ -265,10 +265,10 @@
       color:var(--muted2);
       font-size:13px;
       line-height:1.35;
-      font-weight:650;
+      font-weight:750;
     }
 
-    /* Buttons row */
+    /* BOTONES */
     .btnRow{
       margin-top:16px;
       display:flex;
@@ -277,12 +277,12 @@
       align-items:center;
     }
     .btn{
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.14);
       background:rgba(255,255,255,.06);
       color:var(--text);
       padding:12px 14px;
       border-radius:14px;
-      font-weight:900;
+      font-weight:950;
       font-size:16px;
       cursor:pointer;
       text-decoration:none;
@@ -292,36 +292,40 @@
       gap:10px;
       box-shadow: 0 10px 30px rgba(0,0,0,.25);
     }
-    .btn:hover{filter:brightness(1.05)}
+    .btn:hover{filter:brightness(1.06)}
+
     .btn.calc{
-      padding:14px 18px;
-      font-size:18px;
-      letter-spacing:.6px;
+      padding:15px 20px;
+      font-size:19px;
+      letter-spacing:1px;
       text-transform:uppercase;
-      background: linear-gradient(90deg, rgba(255,79,216,.28), rgba(67,217,255,.22));
-      border-color: rgba(255,255,255,.18);
-    }
-    .btn.free{
-      background: linear-gradient(90deg, rgba(255,204,102,.22), rgba(255,79,216,.18));
-      border-color: rgba(255,204,102,.25);
-      font-weight:950;
-    }
-    .btn.whats{
-      background: rgba(36,229,122,.12);
-      border-color: rgba(36,229,122,.25);
+      background: linear-gradient(90deg, rgba(255,79,216,.34), rgba(67,217,255,.28));
+      border-color: rgba(255,255,255,.22);
     }
 
-    /* Results */
+    .btn.free{
+      background: linear-gradient(90deg, rgba(255,204,102,.22), rgba(255,79,216,.18));
+      border-color: rgba(255,204,102,.28);
+      font-weight:1000;
+    }
+
+    .btn.whats{
+      background: rgba(36,229,122,.14);
+      border-color: rgba(36,229,122,.28);
+      font-weight:1000;
+    }
+
+    /* RESULTADO */
     .result{
       margin-top:14px;
       padding:16px 16px;
       border-radius:16px;
       background:rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
     }
     .total{
-      font-size:44px;
-      font-weight:1000;
+      font-size:46px; /* +size */
+      font-weight:1100;
       margin:0 0 8px;
       letter-spacing:.3px;
     }
@@ -329,8 +333,8 @@
       margin:0;
       color:var(--muted);
       font-size:15px;
-      line-height:1.5;
-      font-weight:700;
+      line-height:1.55;
+      font-weight:750;
     }
 
     .whatsRow{
@@ -345,6 +349,7 @@
 <body>
   <div class="wrap">
     <div class="card">
+
       <div class="hero">
         <div>
           <h1>Calcula tu tarifa <span class="brand">Baila Zouk</span> con Stef y Nesa</h1>
@@ -358,13 +363,13 @@
           </div>
 
           <div class="how">
-            <strong>Cómo funciona:</strong> elige <b>Tipo</b> + <b>Personas</b> + (modalidades o privadas) → pulsa <b>CALCULAR</b>.  
+            <strong>Cómo funciona:</strong> elige <b>Tipo</b> + <b>Personas</b> + (modalidades o privadas) → pulsa <b>CALCULAR</b>.
             Al final puedes confirmar por WhatsApp con el mensaje ya listo.
           </div>
         </div>
 
         <div class="logoBox">
-          <!-- IMPORTANTE: el archivo debe llamarse EXACTO "logobailazouk.png" y estar en la raíz -->
+          <!-- Debe llamarse EXACTO "logobailazouk.png" y estar en la raíz del repo -->
           <img src="logobailazouk.png" alt="Logo Baila Zouk" />
         </div>
       </div>
@@ -391,7 +396,7 @@
           </div>
 
           <div class="field" id="modsCountBox">
-            <div class="label">Modalidades</div>
+            <div class="label">Modalidades (mensual)</div>
             <select id="modsCount">
               <option value="1">1 modalidad</option>
               <option value="2">2 modalidades</option>
@@ -400,8 +405,7 @@
           </div>
         </div>
 
-        <!-- MODALIDADES EXACTAS -->
-        <div class="modsWrap" style="margin-top:14px;">
+        <div class="modsWrap">
           <div class="sectionTitle" style="margin:0;">2) Modalidades exactas</div>
 
           <div class="modRow">
@@ -431,7 +435,6 @@
           <div class="hint" id="modsHint">Elige exactamente 1 modalidad.</div>
         </div>
 
-        <!-- DESCUENTO -->
         <div class="sectionTitle" style="margin:16px 0 10px;">3) Descuento (no acumulable)</div>
         <div class="discountBar">
           <label class="toggle" id="discToggleLabel">
@@ -439,13 +442,13 @@
             Voy con amigo/pareja (−5€ por persona)
           </label>
           <div class="smallNote" id="discNote">
-            Se aplica solo en <b>Mensual</b> y <b>Privadas</b> cuando hay <b>2 personas</b>.
+            Se aplica en <b>Mensual</b> y <b>Privadas</b> si hay <b>2 personas</b>. No aplica en clase suelta.
           </div>
         </div>
 
-        <!-- PRIVADAS (se abre cuando Tipo=Privada) -->
         <div class="privateBox" id="privateBox">
           <div class="title">Privadas + Packs</div>
+
           <div class="privateGrid">
             <div class="field" style="padding:0;background:none;border:none;">
               <div class="label">¿Eres alumno actual?</div>
@@ -481,25 +484,21 @@
           </div>
         </div>
 
-        <!-- BOTONES -->
         <div class="btnRow">
           <button class="btn calc" id="btnCalc">CALCULAR</button>
-          <a class="btn free" href="https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xHXLkY5xwgaYm93pTlrl8Nu3ACw/viewform" target="_blank" rel="noopener">
+          <a class="btn free" href="https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xwgaYm93pTlrl8Nu3ACw/viewform" target="_blank" rel="noopener">
             🎁 Consigue tu clase GRATIS (Formulario)
           </a>
         </div>
 
-        <!-- RESULTADO -->
         <div class="result">
           <div class="total" id="totalTxt">Total: —</div>
-          <p class="details" id="detailTxt">
-            Elige opciones y pulsa <b>CALCULAR</b>.
-          </p>
+          <p class="details" id="detailTxt">Elige opciones y pulsa <b>CALCULAR</b>.</p>
 
-          <!-- WhatsApp al final -->
           <div class="whatsRow">
             <a class="btn whats" id="btnWStef" href="#" target="_blank" rel="noopener">🟢 Confirmar por WhatsApp (Stef)</a>
             <a class="btn whats" id="btnWNesa" href="#" target="_blank" rel="noopener">🟢 Confirmar por WhatsApp (Nesa)</a>
+            <a class="btn" id="btnLanding" href="https://bailazouk.my.canva.site/" target="_blank" rel="noopener">Volver a la Landing</a>
           </div>
         </div>
 
@@ -508,10 +507,11 @@
   </div>
 
 <script>
-  // ---------- CONFIG ----------
+  // ================== CONFIG ==================
   const WHATS_STEF = "34645772010";
   const WHATS_NESA = "34615486473"; // 615486473 con prefijo ES
   const LANDING_URL = "https://bailazouk.my.canva.site/";
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xwgaYm93pTlrl8Nu3ACw/viewform";
 
   // Mensual según tu tabla (TOTAL)
   // 1 persona: 1->30, 2->50, 3->60
@@ -535,15 +535,16 @@
   // Packs: pagas 1 / 4 / 8
   const packFactor = { "1": 1, "5": 4, "10": 8 };
 
-  // Descuento (solo mensual y privadas, solo 2 personas): -5€ por persona = -10 total
+  // Descuento: -5€/persona si 2 personas => -10 total
+  // Aplica en mensual y privadas, NO en suelta
   function descuentoTotal(tipo, personas, activado){
     if(!activado) return 0;
     if(personas !== "2") return 0;
-    if(tipo === "mensual" || tipo === "privada") return 10; // se resta 10
-    return 0; // suelta no
+    if(tipo === "mensual" || tipo === "privada") return 10;
+    return 0;
   }
 
-  // ---------- HELPERS ----------
+  // ================== HELPERS ==================
   const $ = (id)=>document.getElementById(id);
 
   function selectedMods(){
@@ -554,8 +555,16 @@
     return mods;
   }
 
+  // Limita checkboxes según 1/2/3 (solo mensual/suelta)
   function enforceModsLimit(){
     const tipo = $("tipo").value;
+
+    // Privadas: modalidades libres (máx 3) -> no forzamos exacto
+    if(tipo === "privada"){
+      $("modsHint").textContent = "Elige 1 a 3 modalidades (opcional para privadas).";
+      return;
+    }
+
     let limit = parseInt($("modsCount").value, 10);
 
     // Clase suelta: siempre 1 modalidad
@@ -564,17 +573,12 @@
       $("modsCount").value = "1";
     }
 
-    // Privadas: dejamos hasta 3, no obligamos (pero no más de 3 igualmente)
-    if(tipo === "privada"){
-      $("modsHint").textContent = "Elige 1 a 3 modalidades (opcional para privadas).";
-      return;
-    }
-
     $("modsHint").textContent = `Elige exactamente ${limit} modalidad(es).`;
 
-    // Si hay más marcadas que el límite, desmarca extras (dejamos las primeras)
     const ids = ["mSalsa","mBacha","mZouk"];
     const checked = ids.filter(id => $(id).checked);
+
+    // Si hay más marcadas que el límite, desmarca extras
     if(checked.length > limit){
       for(let i = limit; i < checked.length; i++){
         $(checked[i]).checked = false;
@@ -584,17 +588,23 @@
 
   function ensureExactLimitIfNeeded(){
     const tipo = $("tipo").value;
-    if(tipo === "privada") return true; // opcional
+    if(tipo === "privada") return true;
 
     const limit = (tipo === "suelta") ? 1 : parseInt($("modsCount").value, 10);
-    const mods = selectedMods();
-    return mods.length === limit;
+    return selectedMods().length === limit;
+  }
+
+  function buildWhatsLink(phone, msg){
+    const u = new URL("https://wa.me/" + phone);
+    u.searchParams.set("text", msg);
+    return u.toString();
   }
 
   function updateUI(){
     const tipo = $("tipo").value;
+    const personas = $("personas").value;
 
-    // Mostrar/ocultar caja modalidades count
+    // Mostrar/ocultar selector cantidad modalidades
     if(tipo === "privada"){
       $("modsCountBox").style.display = "none";
       $("privateBox").style.display = "block";
@@ -608,27 +618,19 @@
       $("modsCount").value = "1";
     }
 
-    // Descuento solo visible si 2 personas
-    const personas = $("personas").value;
+    // Descuento: solo habilitado si 2 personas
     $("discToggleLabel").style.opacity = (personas === "2") ? "1" : ".45";
     $("discPair").disabled = (personas !== "2");
     if(personas !== "2") $("discPair").checked = false;
 
-    // Hint + límites
     enforceModsLimit();
-  }
-
-  function buildWhatsLink(phone, msg){
-    const u = new URL("https://wa.me/" + phone);
-    u.searchParams.set("text", msg);
-    return u.toString();
   }
 
   function calc(){
     const tipo = $("tipo").value;
     const personas = $("personas").value;
 
-    // Validación modalidades
+    // Validación modalidades (solo mensual/suelta)
     if(!ensureExactLimitIfNeeded()){
       $("totalTxt").textContent = "Total: —";
       $("detailTxt").textContent = "Selecciona las modalidades correctas según el número elegido.";
@@ -639,19 +641,18 @@
     const disc = descuentoTotal(tipo, personas, $("discPair").checked);
 
     let total = 0;
-    let tarifaTxt = "";
+    let tipoTxt = "";
     let extraTxt = "";
 
     if(tipo === "mensual"){
       const mCount = $("modsCount").value;
       total = mensual[personas][mCount];
-      tarifaTxt = `Mensual · ${personas} persona(s) · ${mCount} modalidad(es)`;
+      tipoTxt = `Mensual · ${personas} persona(s) · ${mCount} modalidad(es)`;
     }
 
     if(tipo === "suelta"){
-      // 10€ por persona
       total = sueltaPorPersona * parseInt(personas,10);
-      tarifaTxt = `Clase suelta · ${personas} persona(s)`;
+      tipoTxt = `Clase suelta · ${personas} persona(s)`;
     }
 
     if(tipo === "privada"){
@@ -660,15 +661,14 @@
       const base = privadasBase[alumno][personas];
       const factor = packFactor[pack];
       total = base * factor;
-      tarifaTxt = `Privada · ${alumno === "si" ? "Alumno" : "Externo"} · ${personas} persona(s) · Pack ${pack}`;
+      tipoTxt = `Privada · ${alumno === "si" ? "Alumno" : "Externo"} · ${personas} persona(s) · Pack ${pack}`;
 
-      // Intensivo placeholder
       if($("privExtra").value === "si"){
         extraTxt = " · Intensivo: (activar y definir precio más adelante)";
       }
     }
 
-    // Aplicar descuento (solo mensual/privada y 2 pers)
+    // Aplicar descuento
     if(disc > 0){
       total = Math.max(0, total - disc);
     }
@@ -678,37 +678,39 @@
 
     const modsLine = (mods.length ? mods.join(", ") : "—");
     const discLine = (disc > 0) ? `Sí (−${disc}€ total)` : "No";
+
     $("detailTxt").innerHTML =
-      `<b>Tipo:</b> ${tarifaTxt}${extraTxt}<br/>
+      `<b>Tipo:</b> ${tipoTxt}${extraTxt}<br/>
        <b>Modalidades:</b> ${modsLine}<br/>
        <b>Descuento amigo/pareja:</b> ${discLine}<br/>
+       <b>Formulario clase GRATIS:</b> ${FORM_URL}<br/>
        <b>Landing:</b> ${LANDING_URL}`;
 
-    // WhatsApp message prefill
+    // Mensaje WhatsApp pre-cargado
     const msg =
 `Hola! 👋
 He calculado mi tarifa en Baila Zouk (Puertollano).
 
-✅ Tipo: ${tarifaTxt}${extraTxt}
+✅ Tipo: ${tipoTxt}${extraTxt}
 ✅ Modalidades: ${modsLine}
 ✅ Descuento amigo/pareja: ${discLine}
 💶 Total: ${total} €
 
 ¿Me confirmas y me dices cómo hago la inscripción?
-Formulario clase GRATIS: https://docs.google.com/forms/d/e/1FAIpQLSfJqgEEdjhupSm0R1-5Vi2xHXLkY5xwgaYm93pTlrl8Nu3ACw/viewform
+Formulario clase GRATIS: ${FORM_URL}
 Landing: ${LANDING_URL}`;
 
     $("btnWStef").href = buildWhatsLink(WHATS_STEF, msg);
     $("btnWNesa").href = buildWhatsLink(WHATS_NESA, msg);
   }
 
-  // ---------- EVENTS ----------
-  ["tipo","personas","modsCount","mSalsa","mBacha","mZouk","discPair","privAlumno","privPack","privExtra"].forEach(id=>{
-    $(id).addEventListener("change", ()=>{ updateUI(); });
-  });
+  // ================== EVENTS ==================
+  ["tipo","personas","modsCount","mSalsa","mBacha","mZouk","discPair","privAlumno","privPack","privExtra"]
+    .forEach(id => $(id).addEventListener("change", updateUI));
+
   $("btnCalc").addEventListener("click", calc);
 
-  // Chips WhatsApp arriba también clicables
+  // Chips WhatsApp arriba
   $("chipStef").href = buildWhatsLink(WHATS_STEF, "Hola! Quiero info de tarifas/clases 😊");
   $("chipNesa").href = buildWhatsLink(WHATS_NESA, "Hola! Quiero info de tarifas/clases 😊");
 
